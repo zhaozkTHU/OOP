@@ -8,7 +8,7 @@ make.exe: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 09 16:11:12 2022
+# Make data base, printed on Mon May 09 19:08:45 2022
 
 # Variables
 
@@ -59,7 +59,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-312902c2-5337-41fa-ab68-f6b2f16e22ee-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-9be7008c-4dfa-49f2-8bf5-5d695c1d3923-sock
 # environment
 VSCODE_CWD = E:\Microsoft VS Code
 # default
@@ -87,7 +87,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_35000_BEEFUVVVSFTVONBG
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_24936_TULGKTDEDUXCNHUC
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -195,7 +195,7 @@ PROCESSOR_LEVEL = 25
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 35000
+VSCODE_PID = 24936
 # environment
 USERDOMAIN_ROAMINGPROFILE = LAPTOP-50TSETEA
 # variable set hash-table stats:
@@ -272,6 +272,6 @@ GNUmakefile:
 # strcache performance: lookups = 18 / hit rate = 11%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/18=6%
-# Finished Make data base on Mon May 09 16:11:12 2022
+# Finished Make data base on Mon May 09 19:08:45 2022
 
  
