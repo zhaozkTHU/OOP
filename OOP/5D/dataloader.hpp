@@ -45,7 +45,7 @@ public:
     void setBatchSize(int N) {
         this->batch_size = N; // can also change
         int a;
-        if (batch_size == sentences.size()) a = 1;
+        if (sentences.size() % batch_size == 0) a = sentences.size() / batch_size;
         else a = (sentences.size() - sentences.size() % batch_size) / batch_size + 1;
         _result = vector<vector<vector<int>>>(a);
         for (int i = 0; i < sentences.size(); i++) {
