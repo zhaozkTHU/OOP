@@ -22,18 +22,30 @@ int n, m, s, t;
 
 class Graph {
 public:
-    //起点、终点、容量、流量
-    std::vector<std::tuple<int, int, int, int>> edge;
+    //终点、容量、流量
+    std::vector<std::tuple<int, int, int>> edge[MAXN + 1];
+    //起点、容量、流量
+    std::vector<std::tuple<int, int, int>> _edge[MAXN + 1];
 
     // 返回指定边的流量
-    int Flow(/*TODO*/) { return /* TODO */; }
+    int Flow(int u, int v) {
+        for(auto i = edge[u].begin(); i != edge[u].end(); i++) {
+            if(std::get<0>(*i) == v) return std::get<2>(*i);
+        }
+        return -1;
+    }
 
     // 返回指定边的容量
-    int Capacity(/*TODO*/) { return /* TODO */; }
+    int Capacity(int u, int v) {
+        for(auto i = edge[u].begin(); i != edge[u].end(); i++) {
+            if(std::get<0>(*i) == v) return std::get<1>(*i);
+        }
+        return -1;
+    }
 
-    // 添加一条从 u 到 v 的单向边，容量为 c，流量为 f
     void AddEdge(int u, int v, int c, int f) {
-        edge.push_back(std::make_tuple(u, v, c, f));
+        edge[u].push_back(std::make_tuple(v, c, f));
+        _edge[v].push_back(std::make_tuple(u, c, f));
     }
 } G;
 
@@ -41,44 +53,32 @@ public:
 // 适用于 Ford-Fulkerson 算法的标号过程，基于深度优先搜索给所有结点标号
 //
 void label_dfs(int u) {
-    for (each v/* TODO: 枚举每一个 v 满足 (u, v) 在图中 */) {
+    for (auto tmp : (G.edge[u])) {
+        int v = std::get<0>(tmp);
         // 如果 v 访问过，跳过该结点
         if (direction[v] != 0)
             continue;
-        int c = G.Capacity(/*TODO*/);
-        int f = G.Flow(/*TODO*/);
-        if (/* TODO: 判断是否需要更新 v 的标号 */) {
+        int c = G.Capacity(u, v);
+        int f = G.Flow(u, v);
+        if (c > f) {
             // TODO: 更新标号
+            direction[v] = 1;
+            from[v] = u;
+            delta[v] = c - f;
             label_dfs(v); // 从 v 出发，搜索邻接的未标号结点
         }
     }
-    for (/* TODO: 枚举每一个 v 满足 (v, u) 在图中 */) {
+    for (auto tmp : G._edge[u]) {
         // TODO: 仿照以上代码补全反向标号过程
-    }
-}
-
-//
-// 适用于 Edmonds-Karp 算法的标号过程，基于广度优先搜索给所有结点标号
-//
-void label_bfs() {
-    static int q[MAXN + 1];
-    int hd = 0, tl = 0;
-    q[tl++] = s; // 第一个搜索源点
-    while (hd < tl) {
-        int u = q[hd++]; // 按入队顺序取出未标号结点
-        for (each v/* TODO: 枚举每一个 v 满足 (u, v) 在图中 */) {
-            // 如果 v 访问过，跳过该结点
-            if (direction[v] != 0)
-                continue;
-            int c = G.Capacity(/*TODO*/);
-            int f = G.Flow(/*TODO*/);
-            if (/* TODO: 判断是否需要更新 v 的标号 */) {
-                // TODO: 更新标号
-                q[tl++] = v; // 从 v 出发，搜索邻接的未标号结点
-            }
-        }
-        for (/* TODO: 枚举每一个 v 满足 (v, u) 在图中 */) {
-            // TODO: 仿照以上代码补全反向标号过程
+        int v = std::get<0>(tmp);
+        if(direction[v] != 0)
+            continue;
+        int f = G.Flow(v, u);
+        if(f > 0) {
+            direction[v] = -1;
+            from[v] = u;
+            delta[v] = f;
+            label_dfs(v);
         }
     }
 }
@@ -87,23 +87,22 @@ void label_bfs() {
 // Ford-Fulkerson 及 Edmonds-Karp 算法中的标号过程。
 //
 bool label() {
-    // TODO: 初始化标号数组
-    // 深度/广度优先搜索的调用入口，基于 bfs 或 dfs 实现均可
     label_dfs(s);
-    // OR
-    // label_bfs();
-    // 通过汇点是否被标号判断允许流是否存在
     return direction[t] != 0;
 }
 
 void printPath() {
+    int size = delta[t];
     int pathLength = 0;
     static int Path[MAXN + 1];
     // 根据记录的 from 数组，从汇点倒推出增流路径
     for (int v = t; v != s; v = from[v]) {
         Path[pathLength++] = v;
+        if(delta[v] < size) size = delta[v];
     }
     // TODO: 按照题目要求向标准输出中打印结果
+    std::cout << pathLength + 1 << " " << size << std::endl << s << " ";
+    for(int i = pathLength - 1; i >= 0; i--) std::cout << Path[i] << " ";
 }
 
 void init() {
