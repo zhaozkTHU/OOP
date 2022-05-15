@@ -6,7 +6,9 @@
         "memory": "cpp",
         "xstring": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "cstdio": "cpp",
+        "iostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

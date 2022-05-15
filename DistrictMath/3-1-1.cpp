@@ -1,3 +1,5 @@
+//最小生成树——Kruskal算法
+
 #include <cstdio>  // scanf, printf
 #include <iostream>  // abs
 #include <vector>  // std::vector
