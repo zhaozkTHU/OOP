@@ -3,6 +3,7 @@
 #include <vector>  // std::vector
 #include <algorithm>  // std::sort
 #include<cmath>
+#include<stack>
 using namespace std;
 // =============================================================
 // 数据读入部分
@@ -58,28 +59,20 @@ void init_empty_graph() {
 
 // 判断从 u 出发是否能到达 v（使用 DFS）
 // 也可使用 BFS 进行判断（请自行编写）
+vector<int> path;
 
 bool dfs(int u, int v) {
-    bool able[MAX_N + 1] = {0};
-    able[u] = true;
-    for(;;) {
-        int i = 0;
-        for(int i = 1; i <= MAX_N; i++) {
-            if(able[i] == true) {
-                vector<Edge>::iterator it;
-                for(it = adj[i].begin(); it != adj[i].end(); it++) {
-                    if(able[it->v] == false) {
-                        able[it->v] = true;
-                        i++;
-                    }
-                }
-            }
+    path.push_back(u);
+    if(u == v) return true;
+    for(auto a : adj[u]) {
+        if(count(path.begin(), path.end(), a.v) == 0) {
+            if(dfs(a.v, v)) return true;
         }
-        if(able[v] == true) return true;
-        if(i == 0) break;
     }
+    path.pop_back();
     return false;
 }
+
 
 
 // 判断当前图加入边 e 后是否有回路
@@ -87,8 +80,8 @@ bool has_cycle(Edge e) {
     // T+e 有回路 ↔ T 中 e 的两个端点 u 和 v 连通
     // 因此只需从 u 出发，判断是否可以到达 v
     
-    
-    return dfs(e.u, e.v) || dfs(e.v, e.u);
+    path.clear();
+    return dfs(e.u, e.v);
 }
 
 // 添加边 e 到图 T 中
@@ -117,7 +110,7 @@ void solve() {
     // 准备所有边
     std::vector<Edge> edges;
     for (int i = 1; i <= n; i++) {
-        for (int j = 1; j < i; j++) {
+        for (int j = 1; j < i; j++) { 
             Edge e;
             e.u = i; e.v = j;
             e.cost = calc_cost(i, j);
@@ -138,7 +131,7 @@ void solve() {
         // a. 如果图 T+e 无回路，则 T ← T+e
         // b. 如果图 T+e 有回路，跳过这条边
         
-        if (has_cycle(e)) {  // 判断 T+e 是否无回路
+        if (!has_cycle(e)) {  // 判断 T+e 是否无回路
             // T ← T+e
             // 总成本 += e 的成本
             // !!! TODO: 你的代码 !!!
