@@ -1,13 +1,17 @@
-#include <iostream>
-#include <string>
-#include <regex>
+#include<iostream>
+#include<functional>
+#include<memory>
 using namespace std;
 
-int a() { return 0; }
+class a {
+	string b;
+public:
+	~a() { cout << "~"; }
+	operator bool() { return b.empty(); }
+	operator int() { return 0; }
+};
 
 int main() {
-	int a[10];
-	sort(a, a + 10);
+	a b;
+	if (b) cout << 1;
 }
-
-//dssd

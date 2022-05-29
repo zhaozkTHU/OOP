@@ -8,7 +8,8 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "cstdio": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
