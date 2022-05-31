@@ -15,7 +15,7 @@ public:
 	}
 	virtual void operator+=(int) {}
 	virtual void operator+=(const std::string &) {}
-	virtual Object& operator[](int) {}
+	virtual Object &operator[](int) {}
 };
 
 class IntContent : public Content {
@@ -44,7 +44,7 @@ class VectorContent : public Content {
 	std::vector<Object> x;
 public:
 	VectorContent(const std::vector<Object> &_x) : x(_x) {}
-	Object& operator[](int _x) {
+	Object &operator[](int _x) {
 		return x[_x];
 	}
 };
