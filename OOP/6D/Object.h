@@ -1,4 +1,5 @@
 #pragma once
+
 #include <list>
 #include <iostream>
 #include <memory>
@@ -16,7 +17,6 @@ public:
 	virtual void operator+=(int) {}
 	virtual void operator+=(const std::string &) {}
 	virtual Object& operator[](int) {}
-	virtual ~Content() = 0;
 };
 
 class IntContent : public Content {

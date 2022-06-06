@@ -9,7 +9,8 @@
         "xutility": "cpp",
         "cstdio": "cpp",
         "iostream": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "ostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
