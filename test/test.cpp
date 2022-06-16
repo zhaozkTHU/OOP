@@ -1,6 +1,30 @@
-#include<iostream>
+#include <iostream>
+using namespace std;
+class A {
+public:
+	A() { fun(); }
+	virtual void fun() {}
+	~A() {}
+};
+
+class B : A {
+public:
+	B() { fun(); }
+	void fun() {}
+	~B() {}
+};
+
+class C : public B {
+public:
+	C() { fun(); }
+	virtual void fun() {}
+	~C() {}
+};
+
 int main() {
-	for (auto i = 4; i >= 0; i--) {
-		std::cout << i;
-	}
+	B *pb = new C();
+	pb->fun();
+	delete pb;
+	cout << "All done!" << endl;
+	return 0;
 }
