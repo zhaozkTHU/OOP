@@ -1,13 +1,6 @@
-class a {
-	const static int b = 1;
-};
-
-class b :private a {
-
-};
-
-
-
+#include<iostream>
 int main() {
-	b *ptr;
+	for (auto i = 4; i >= 0; i--) {
+		std::cout << i;
+	}
 }

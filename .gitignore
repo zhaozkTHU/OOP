@@ -1,4 +1,4 @@
 *.exe
 *.o
 *.obj
-test/
+test.cpp
