@@ -5,6 +5,7 @@ public:
 	A() { fun(); }
 	virtual void fun() {}
 	~A() {}
+
 };
 
 class B : A {
